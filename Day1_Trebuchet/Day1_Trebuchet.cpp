@@ -56,7 +56,7 @@ int main()
                             last = 1;
                             currNum = true;
                         }
-                        i += 2;
+                        i += 1;
                     }
                     break;
 
@@ -70,7 +70,7 @@ int main()
                             last = 2;
                             currNum = true;
                         }
-                        i += 2;
+                        i += 1;
                     }
                     else if (isNum(input, "three", i)) {
                         if (!fNum) {
@@ -81,7 +81,7 @@ int main()
                             last = 3;
                             currNum = true;
                         }
-                        i += 4;
+                        i += 3;
                     }
                     break;
 
@@ -95,7 +95,7 @@ int main()
                             last = 4;
                             currNum = true;
                         }
-                        i += 3;
+                        i += 2;
                     }
                     else if (isNum(input, "five", i)) {
                         if (!fNum) {
@@ -106,7 +106,7 @@ int main()
                             last = 5;
                             currNum = true;
                         }
-                        i += 3;
+                        i += 2;
                     }
                     break;
 
@@ -120,7 +120,7 @@ int main()
                             last = 6;
                             currNum = true;
                         }
-                        i += 2;
+                        i += 1;
                     }
                     else if (isNum(input, "seven", i)) {
                         if (!fNum) {
@@ -131,7 +131,7 @@ int main()
                             last = 7;
                             currNum = true;
                         }
-                        i += 4;
+                        i += 3;
                     }
                     break;
 
@@ -145,7 +145,7 @@ int main()
                             last = 8;
                             currNum = true;
                         }
-                        i += 4;
+                        i += 3;
                     }
                     break;
 
@@ -159,7 +159,7 @@ int main()
                             last = 9;
                             currNum = true;
                         }
-                        i += 3;
+                        i += 2;
                     }
                     break;
 
