@@ -33,33 +33,7 @@ int main()
 
 		for (int i = 0; i < curr.length(); i++) {
 
-			/*if (isdigit(curr[i])) {
-
-				int j = i;
-
-				while (isdigit(curr[j]) && curr[j] != '.' && j < curr.length()) {
-					temp += curr[j];
-					j++;
-				}
-
-				for (int k = i; k < j; k++) {
-					if (ispunct(prev[k]) && prev[k] != '.') {
-						adj = true;
-						break;
-					}
-				}
-				if (!adj) {
-					if ((i > 0 && ispunct(curr[i - 1]) && curr[i - 1] != '.') || (j - 1 < curr.length() - 1 && ispunct(curr[j]) && curr[j] != '.')
-						|| (i > 0 && ispunct(prev[i - 1]) && prev[i - 1] != '.') || (j - 1 < prev.length() - 1 && ispunct(prev[j]) && prev[j] != '.')) {
-						adj = true;
-					}
-				}
-				i = j - 1;
-				if (adj) {
-					currN = stoi(temp);
-
-				}
-			}*/
+			
 			if (curr[i] == '*') {
 
 				//*************************************************************************************************************
@@ -372,6 +346,7 @@ int main()
 
 //p2
 //20231221 0630
+//20231221 0830
 
 
 
