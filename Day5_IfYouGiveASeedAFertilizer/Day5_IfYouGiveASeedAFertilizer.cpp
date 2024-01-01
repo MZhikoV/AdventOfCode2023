@@ -2,14 +2,14 @@
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include <vector>
+#include <list>
 
 
 using namespace std;
 
-void readStoD(vector<long long int>& destV);
+void readStoD(list<long long int>& destV);
 
-void printV(vector<long long int> destV);
+void printV(list<long long int> destV);
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
 
     stringstream seedsStream(seedsS);
 
-    vector<long long int> seeds;
+    list<long long int> seeds;
 
     long long int num;
     long long int numRange;
@@ -44,7 +44,7 @@ int main()
 
 
 
-    vector<long long int>::iterator it1;
+    list<long long int>::iterator it1;
 
     string input;
 
@@ -93,10 +93,10 @@ int main()
         }
     }
 
+    it1 = seeds.begin();
+    long long int minNum = *it1;
 
-    long long int minNum = seeds[0];
-
-    for (it1 = seeds.begin() + 1; it1 != seeds.end(); it1++) {
+    for (it1 = seeds.begin(); it1 != seeds.end(); it1++) {
         if (minNum > *it1) {
             minNum = *it1;
         }
@@ -106,11 +106,11 @@ int main()
 
 }
 
-void readStoD(vector<long long int>& destV) {
+void readStoD(list<long long int>& destV) {
 
-    vector<long long int>::iterator it1,it2;
+    list<long long int>::iterator it1,it2;
 
-    vector<long long int> temp= destV;
+    list<long long int> temp= destV;
 
     string input;
     while (getline(cin, input)) {
@@ -142,7 +142,7 @@ void readStoD(vector<long long int>& destV) {
 
 }
 
-void printV(vector<long long int> destV) {
+void printV(list<long long int> destV) {
     for (long long nnum : destV) {
         cout << nnum << endl;
     }
@@ -167,13 +167,13 @@ void printV(vector<long long int> destV) {
 #include <string>
 #include <sstream>
 #include <algorithm>
-#include <vector>
+#include <list>
 
 using namespace std;
 
-void readStoD(vector<long long int>& destV);
+void readStoD(list<long long int>& destV);
 
-void printV(vector<long long int> destV);
+void printV(list<long long int> destV);
 
 int main()
 {
@@ -187,7 +187,7 @@ int main()
 
     stringstream seedsStream(seedsS);
 
-    vector<long long int> seeds;
+    list<long long int> seeds;
 
     long long int num;
 
@@ -199,7 +199,7 @@ int main()
         cout << nnum << endl;
     }
 
-    vector<long long int>::iterator it1;
+    list<long long int>::iterator it1;
 
     string input;
 
@@ -261,11 +261,11 @@ int main()
 
 }
 
-void readStoD(vector<long long int>& destV) {
+void readStoD(list<long long int>& destV) {
 
-    vector<long long int>::iterator it1,it2;
+    list<long long int>::iterator it1,it2;
 
-    vector<long long int> temp= destV;
+    list<long long int> temp= destV;
 
     string input;
     while (getline(cin, input)) {
@@ -297,7 +297,7 @@ void readStoD(vector<long long int>& destV) {
 
 }
 
-void printV(vector<long long int> destV) {
+void printV(list<long long int> destV) {
     for (long long nnum : destV) {
         cout << nnum << endl;
     }
