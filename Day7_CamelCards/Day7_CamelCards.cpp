@@ -9,7 +9,13 @@
 
 using namespace std;
 
+void sortHands(vector<string>& hands, vector<string>& score);
 
+int valueCard(char c);
+
+void combineHands(vector<string>& inp, vector<string>& outp);
+
+void combineValues(vector<string>& inp, vector<int>& outp);
 
 #include <iostream>
 
@@ -45,10 +51,6 @@ int main()
     vector<string>dist;
     vector<string>distR;
 
-
-
-
-
     while (getline(cin, input)) {
         if (input.empty()) {
             break;
@@ -61,33 +63,21 @@ int main()
         inpS >> cards >> result;
         
         int temp[5] = { 1,1,1,1,1 }; //temporary array to determine the card hand type
+        string cardsT = cards; //temporary string to determine the card hand type
 
         for (int i = 0; i < 4; i++) {
             for (int j = i + 1; j < 5; j++) {
-                if (cards[i] == cards[j]) {
+                if ((cardsT[i] == cardsT[j]) && cardsT[i]!='0') {
                     temp[i] += 1;
+                    cardsT[j] = '0';
                 }
             }
         }
 
-        /*if (temp[0] == 5) {
-            five.push_back(cards);
-            fiveR.push_back(result);
-            continue;
-        }
-
-        for (int i = 0; i < 5; i++) {
-            if (temp[i] == 4) {
-                four.push_back(cards);
-                fourR.push_back(result);
-            }
-            else if ()
-        }*/
-
         bool triple = false, doubleP = false, singleP = false, nomatch = true, exitLoop=false;
 
         for (int i = 0; i < 5; i++) {
-            cout << temp[i] << endl;
+            //cout << temp[i] << endl;
 
             switch (temp[i]) {
             case 5:
@@ -137,13 +127,188 @@ int main()
             distR.push_back(result);
         }
 
-
-
-
-
     }
 
-    cout << "debug" << endl;
+    if (!five.empty()) sortHands(five, fiveR);
+    if (!four.empty()) sortHands(four, fourR);
+    if (!fH.empty()) sortHands(fH, fHR);
+    if (!three.empty()) sortHands(three, threeR);
+    if (!dPr.empty()) sortHands(dPr, dPrR);
+    if (!pair.empty()) sortHands(pair, pairR);
+    if (!dist.empty()) sortHands(dist, distR);
+ 
+    
+    vector <string> sortedHands;
+    vector <int> sortedValues;
+
+
+    combineHands(five, sortedHands);
+    combineValues(fiveR, sortedValues);
+    combineHands(four, sortedHands);
+    combineValues(fourR, sortedValues);
+    combineHands(fH, sortedHands);
+    combineValues(fHR, sortedValues);
+    combineHands(three, sortedHands);
+    combineValues(threeR, sortedValues);
+    combineHands(dPr, sortedHands);
+    combineValues(dPrR, sortedValues);
+    combineHands(pair, sortedHands);
+    combineValues(pairR, sortedValues);
+    combineHands(dist, sortedHands);
+    combineValues(distR, sortedValues);
+
+
+    /*for (string str : sortedHands) {
+        cout << str << endl;
+    }*/
+
+    vector<int>::iterator it1;
+
+    int res = 0;
+    int factor=0;
+
+    for (it1 = (sortedValues.end() - 1);;) {
+        factor++;
+        res += (factor * *it1);
+        if (it1 == sortedValues.begin()) {
+            break;
+        }
+        it1--;
+    }
+
+    cout << res << endl;
+
+   // cout << "debug" << endl;
 
     return 0;
+}
+
+//function for sorting values in descending order "bubble sort"
+void sortHands(vector<string>& hands, vector<string>& score) {
+    
+    vector<string>::iterator it1, it2, it3, it4;
+
+    int k = 0;
+
+    for (it1 = hands.begin(), it2 = score.begin(); it1 != (hands.end() - 1), it2 != (score.end() - 1); it1++, it2++) {
+        for (it3 = hands.begin(), it4 = score.begin(); it3 != hands.end() - k - 1, it4 != score.end() - k - 1; it3++, it4++) {
+            string firstSt = *it3;
+            string secondSt = *(it3 + 1);
+
+            string value{};
+            string temp{};
+
+            bool second = false;
+
+            for (int i = 0; i < 5; i++) {
+                int valFirst = valueCard(firstSt[i]);
+                int valSecond = valueCard(secondSt[i]);
+
+                if (valFirst > valSecond) {
+                    break;
+                }
+                else if (valFirst < valSecond) {
+                    second = true;
+                    break;
+                }
+            }
+
+            if (second) {
+                temp = *it3;
+                *it3 = *(it3 + 1);
+                *(it3 + 1) = temp;
+
+                value = *it4;
+                *it4 = *(it4 + 1);
+                *(it4 + 1) = value;
+            }
+
+        }
+        k++;
+    }
+}
+
+/*
+//function for sorting values in descending order
+void sortHands(vector<string> &hands, vector<string> &score) {
+
+    vector<string>::iterator it1, it2, it3, it4;
+
+    for (it1 = hands.begin(), it2 = score.begin(); it1 != (hands.end() - 1), it2 != (score.end() - 1); it1++, it2++) {
+        for (it3 = hands.begin()+1, it4 = score.begin()+1; it3 != hands.end(), it4 != score.end(); it3++, it4++) {
+            
+            string firstSt = *it1;
+            string secondSt = *it3;
+
+            string value{};
+            string temp{};
+
+            bool first = false, second = false;
+
+            for (int i = 0; i < 5; i++) {
+                int valFirst = valueCard(firstSt[i]);
+                int valSecond = valueCard(secondSt[i]);
+
+                if (valFirst > valSecond) {
+                    //first = true;
+                    break;
+                }
+                else if (valFirst < valSecond) {
+                    second = true;
+                    break;
+                }
+            }
+            if (first) {
+                temp = *it1;   
+                *it1 = *it3;    
+                *it3 = temp; 
+                
+                value = *it2;
+                *it2 = *it4;
+                *it4 = value;
+            }
+            else if (second) {
+                temp = *it1;
+                *it1 = *it3;
+                *it3 = temp;
+
+                value = *it2;
+                *it2 = *it4;
+                *it4 = value;
+            }
+        }
+    }
+
+}
+*/
+
+//function for determining the values of each card
+int valueCard(char c) {
+    if (isdigit(c)) {
+        return c - 48;
+    }
+    else {
+        switch (c) {
+        case 'A': return 14;
+        case 'K': return 13;
+        case 'Q': return 12;
+        case 'J': return 11;
+        case 'T': return 10;
+        }
+    }
+}
+
+//function for creating combined vector for all the card hands
+void combineHands(vector<string>& inp, vector<string>& outp) {
+    for (string str : inp) {
+        outp.push_back(str);
+    }
+}
+
+//function for creating combined vector for all the hands values
+void combineValues(vector<string>& inp, vector<int>& outp) {
+    for (string str : inp) {
+        int val = stoi(str);
+        outp.push_back(val);
+    }
 }
