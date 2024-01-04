@@ -11,6 +11,8 @@ using namespace std;
 
 string currentValue(char c, int index, vector<string>& L, vector<string>& R);
 
+bool checkSymb(string a, char reqSymb);
+
 
 int main()
 {
@@ -51,32 +53,131 @@ int main()
 
     }
 
+    vector<string> newLabel;
+    vector<int> newLabelIdx;
+    vector<string> newLeft;
+    vector<string> newRight;
+
+    vector<string> currLeft;
+    vector<string> currRight;
+    vector<int> currLabelIdx;
+
+    vector<string>::iterator it1, it4;
+    vector<int>::iterator it2, it3;
+
+    for (it1 = label.begin(); it1 != label.end(); it1++) {
+        if (checkSymb(*it1, 'A')) {
+            newLabel.push_back(*it1);
+            int idxV = it1 - label.begin();
+            currLabelIdx.push_back(idxV);
+            currLeft.push_back(left[idxV]);
+            currRight.push_back(right[idxV]);
+
+
+        }
+    }
+
+
+
+    //for (string st : newLabel) {
+    //    cout << st << endl;
+    //}
+
+    //for (int in : newLabelIdx) {
+    //    cout << in << endl;
+    //}
+
+    //for (string st : newLeft) {
+    //    cout << st << endl;
+    //}
+
+    //for (string st : newRight) {
+    //    cout << st << endl;
+    //}
+
+    bool isZ = true;
+
     int steps = 0;
 
-    vector<string>::iterator itStart;
-
-    itStart = find(label.begin(), label.end(), "AAA");
-
-    string currLabel = *itStart;
-
-    
-    while (currLabel != "ZZZ") {
+    while (true) {
 
         for (int i = 0; i < directions.length(); i++) {
-        
-            int idx = itStart - label.begin();
 
-            currLabel = currentValue(directions[i], idx, left, right);
+            //Да се прерправи кода така, че на база на избраните леви или дести 
+            //стойности да се намерят новите стойности на лейбъл със файнд и залагане 
+            // на съответен индекс. Да се въведат новите стойности в съотв.вектори за 
+            // новлейбъл и индекслейбъл
 
-            steps++;
+            //those clear functions to be checked and moved after the for loop if necessary, and it will be
+            newLabel.clear();
+            currLabelIdx.clear();
+            currLeft.clear();
+            currRight.clear();
 
-            itStart = find(label.begin(), label.end(), currLabel);
 
-            if (currLabel == "ZZZ") {
+            for (it2 = currLabelIdx.begin(); it2 != currLabelIdx.end(); it2++) {
+
+                string temp = currentValue(directions[i], *it2, currLeft, currRight);
+  
+                newLabel.push_back(temp);
+
+                it4 = find(label.begin(), label.end(), temp);
+
+                int found = (it4 - label.begin());
+
+                newLeft.push_back(left[found]);
+                newRight.push_back(right[found]);
+                newLabelIdx.push_back(found);
+
+                steps++;
+
+                if (!checkSymb(temp, 'Z')) {
+                    isZ = false;
+               }
+            }
+            if (isZ = true) {
                 break;
             }
         }
-    }
+        if (isZ = true) {
+            break;
+        }
+   }
+
+
+
+
+
+
+
+
+
+    //int steps = 0;
+
+    //vector<string>::iterator itStart;
+
+    //itStart = find(label.begin(), label.end(), "AAA");
+
+    //string currLabel = *itStart;
+
+    //
+    //while (currLabel != "ZZZ") {
+
+    //    for (int i = 0; i < directions.length(); i++) {
+    //    
+    //        int idx = itStart - label.begin();
+
+    //        currLabel = currentValue(directions[i], idx, left, right);
+
+    //        steps++;
+
+    //        itStart = find(label.begin(), label.end(), currLabel);
+
+    //        if (currLabel == "ZZZ") {
+    //            break;
+    //        }
+    //    }
+    //}
 
     cout << steps << endl;
 
@@ -92,6 +193,15 @@ string currentValue(char c, int index, vector<string>& L, vector<string>& R) {
     }
     else {
         return R[index];
+    }
+}
+
+bool checkSymb(string a, char reqSymb) {
+    if (a[2] == reqSymb) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
