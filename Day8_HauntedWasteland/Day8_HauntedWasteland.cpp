@@ -13,6 +13,7 @@ string currentValue(char c, int index, vector<string>& L, vector<string>& R);
 
 bool checkSymb(string a, char reqSymb);
 
+bool checkSeq(vector<string> seq, char reqSymb);
 
 int main()
 {
@@ -61,13 +62,14 @@ int main()
     vector<string> currLeft;
     vector<string> currRight;
     vector<int> currLabelIdx;
+    vector<string> currLabel;
 
     vector<string>::iterator it1, it4;
     vector<int>::iterator it2, it3;
 
     for (it1 = label.begin(); it1 != label.end(); it1++) {
         if (checkSymb(*it1, 'A')) {
-            newLabel.push_back(*it1);
+            currLabel.push_back(*it1);
             int idxV = it1 - label.begin();
             currLabelIdx.push_back(idxV);
             currLeft.push_back(left[idxV]);
@@ -76,24 +78,6 @@ int main()
 
         }
     }
-
-
-
-    //for (string st : newLabel) {
-    //    cout << st << endl;
-    //}
-
-    //for (int in : newLabelIdx) {
-    //    cout << in << endl;
-    //}
-
-    //for (string st : newLeft) {
-    //    cout << st << endl;
-    //}
-
-    //for (string st : newRight) {
-    //    cout << st << endl;
-    //}
 
     bool isZ = true;
 
@@ -109,17 +93,19 @@ int main()
             // новлейбъл и индекслейбъл
 
             //those clear functions to be checked and moved after the for loop if necessary, and it will be
-            newLabel.clear();
-            currLabelIdx.clear();
-            currLeft.clear();
-            currRight.clear();
-
+            
+            
+            steps++;
+            
+            int currIdx = 0;
 
             for (it2 = currLabelIdx.begin(); it2 != currLabelIdx.end(); it2++) {
 
-                string temp = currentValue(directions[i], *it2, currLeft, currRight);
+                string temp = currentValue(directions[i], currIdx, currLeft, currRight);
   
                 newLabel.push_back(temp);
+
+                currIdx++;
 
                 it4 = find(label.begin(), label.end(), temp);
 
@@ -129,55 +115,43 @@ int main()
                 newRight.push_back(right[found]);
                 newLabelIdx.push_back(found);
 
-                steps++;
+                
 
-                if (!checkSymb(temp, 'Z')) {
+                /*if (!checkSymb(temp, 'Z')) {
                     isZ = false;
-               }
+               }*/
             }
-            if (isZ = true) {
+            /*if (isZ = true) {
+                break;
+            }*/
+
+            currLabelIdx.clear();
+            currLeft.clear();
+            currRight.clear();
+            currLabel.clear();
+
+            currLabelIdx = newLabelIdx;
+            currLeft = newLeft;
+            currRight = newRight;
+            currLabel = newLabel;
+
+            newLabelIdx.clear();
+            newLeft.clear();
+            newRight.clear();
+            newLabel.clear();
+
+            isZ = checkSeq(currLabel, 'Z');
+
+            if (isZ == true) {
                 break;
             }
+
         }
-        if (isZ = true) {
+
+        if (isZ == true) {
             break;
         }
    }
-
-
-
-
-
-
-
-
-
-    //int steps = 0;
-
-    //vector<string>::iterator itStart;
-
-    //itStart = find(label.begin(), label.end(), "AAA");
-
-    //string currLabel = *itStart;
-
-    //
-    //while (currLabel != "ZZZ") {
-
-    //    for (int i = 0; i < directions.length(); i++) {
-    //    
-    //        int idx = itStart - label.begin();
-
-    //        currLabel = currentValue(directions[i], idx, left, right);
-
-    //        steps++;
-
-    //        itStart = find(label.begin(), label.end(), currLabel);
-
-    //        if (currLabel == "ZZZ") {
-    //            break;
-    //        }
-    //    }
-    //}
 
     cout << steps << endl;
 
@@ -185,8 +159,6 @@ int main()
 }
 
 string currentValue(char c, int index, vector<string>& L, vector<string>& R) {
-
-    int idx = 0;
 
     if (c == 'L') {
         return L[index];
@@ -203,6 +175,17 @@ bool checkSymb(string a, char reqSymb) {
     else {
         return false;
     }
+}
+
+bool checkSeq(vector<string> seq, char reqSymb) {
+
+    for (string check : seq) {
+        if (check[2] != reqSymb) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 
