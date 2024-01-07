@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day7_CamelCards", "Day7_Cam
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day8_HauntedWasteland", "Day8_HauntedWasteland\Day8_HauntedWasteland.vcxproj", "{8D65663A-6AC0-4EB5-967F-9BFD8DF1F8E5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Day9_MirageMaintenance", "Day9_Mirage_Maintenance\Day9_Mirage_Maintenance.vcxproj", "{367E92EF-5086-4B76-B848-3B2873BD6D4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{8D65663A-6AC0-4EB5-967F-9BFD8DF1F8E5}.Release|x64.Build.0 = Release|x64
 		{8D65663A-6AC0-4EB5-967F-9BFD8DF1F8E5}.Release|x86.ActiveCfg = Release|Win32
 		{8D65663A-6AC0-4EB5-967F-9BFD8DF1F8E5}.Release|x86.Build.0 = Release|Win32
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Debug|x64.ActiveCfg = Debug|x64
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Debug|x64.Build.0 = Debug|x64
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Debug|x86.ActiveCfg = Debug|Win32
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Debug|x86.Build.0 = Debug|Win32
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Release|x64.ActiveCfg = Release|x64
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Release|x64.Build.0 = Release|x64
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Release|x86.ActiveCfg = Release|Win32
+		{367E92EF-5086-4B76-B848-3B2873BD6D4E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

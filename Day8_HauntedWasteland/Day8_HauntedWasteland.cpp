@@ -86,14 +86,6 @@ int main()
     while (true) {
 
         for (int i = 0; i < directions.length(); i++) {
-
-            //Да се прерправи кода така, че на база на избраните леви или дести 
-            //стойности да се намерят новите стойности на лейбъл със файнд и залагане 
-            // на съответен индекс. Да се въведат новите стойности в съотв.вектори за 
-            // новлейбъл и индекслейбъл
-
-            //those clear functions to be checked and moved after the for loop if necessary, and it will be
-            
             
             steps++;
             
@@ -115,15 +107,7 @@ int main()
                 newRight.push_back(right[found]);
                 newLabelIdx.push_back(found);
 
-                
-
-                /*if (!checkSymb(temp, 'Z')) {
-                    isZ = false;
-               }*/
             }
-            /*if (isZ = true) {
-                break;
-            }*/
 
             currLabelIdx.clear();
             currLeft.clear();
@@ -151,7 +135,8 @@ int main()
         if (isZ == true) {
             break;
         }
-   }
+
+    }
 
     cout << steps << endl;
 
